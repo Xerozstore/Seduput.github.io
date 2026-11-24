@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SEDUPUT ENAK - Puding Sedot Official Store</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #fff5f7 0%, #fffbeb 50%, #fdf2f8 100%);
+            overflow-x: hidden;
+        }
+        /* Efek Kartu 3D Hover */
+        .card-3d {
+            transition: transform 0.35s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.35s ease;
+            transform-style: preserve-3d;
+        }
+        .card-3d:hover {
+            transform: translateY(-10px) rotateX(4deg) rotateY(-4deg);
+            box-shadow: 0 25px 35px -10px rgba(0, 0, 0, 0.15);
+        }
+        #canvas-container {
+            width: 100%;
+            height: 320px;
+            cursor: grab;
+        }
+        #canvas-container:active {
+            cursor: grabbing;
+        }
+    </style>
+</head>
+<body class="text-gray-800 antialiased">
+
+    <!-- Navbar -->
+    <nav class="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-pink-100 shadow-sm">
+        <div class="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <span class="text-2xl">🥤</span>
+                <span class="font-extrabold text-xl tracking-tight text-amber-900">SEDUPUT<span class="text-pink-600">ENAK</span></span>
+            </div>
+            <div class="flex items-center space-x-3">
+                <a href="https://instagram.com/seduputenak" target="_blank" rel="noopener noreferrer" 
+                   class="flex items-center gap-1.5 bg-gradient-to-r from-purple-600 via-pink-600 to-orange-500 text-white text-xs sm:text-sm font-semibold px-3.5 py-2 rounded-full shadow hover:opacity-90 transition">
+                    <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                    <span>@seduputenak</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section + 3D Interactive Pouch -->
+    <header class="max-w-6xl mx-auto px-4 pt-8 pb-12 grid md:grid-cols-2 gap-8 items-center">
+        <div class="text-center md:text-left space-y-4">
+            <span class="inline-block bg-amber-100 text-amber-800 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
+                ✨ Pre-Order Open • Standing Pouch
+            </span>
+            <h1 class="text-4xl sm:text-5xl font-extrabold text-gray-900 leading-tight">
+                Manis, Lembut & <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-600 to-pink-600">Lumer Diseruput!</span>
+            </h1>
+            <p class="text-gray-600 text-base sm:text-lg">
+                Puding sedot kekinian dalam kemasan standing pouch praktis. Tersedia dalam 3 varian rasa favorit yang bikin nagih di setiap sedotan!
+            </p>
+            <div class="pt-2 flex flex-wrap justify-center md:justify-start gap-4 items-center">
+                <div class="bg-white px-5 py-3 rounded-2xl shadow-md border border-pink-100">
+                    <span class="text-xs text-gray-500 block">Harga Spesial</span>
+                    <span class="text-2xl font-extrabold text-pink-600">Rp 4.000</span>
+                    <span class="text-xs text-gray-500">/ pcs</span>
+                </div>
+                <a href="#order-section" class="bg-gray-900 hover:bg-gray-800 text-white font-bold px-6 py-4 rounded-2xl shadow-lg transition transform hover:scale-105">
+                    Pesan Sekarang 👇
+                </a>
+            </div>
+        </div>
+
+        <!-- 3D Model Canvas -->
+        <div class="bg-white/70 backdrop-blur-sm rounded-3xl p-4 shadow-xl border border-white flex flex-col items-center">
+            <div id="canvas-container"></div>
+            <div class="flex gap-2 mt-2">
+                <button onclick="change3DFlavor('coklat')" class="px-3 py-1 text-xs font-bold rounded-full bg-amber-900 text-white shadow">Cokelat</button>
+                <button onclick="change3DFlavor('mangga')" class="px-3 py-1 text-xs font-bold rounded-full bg-amber-400 text-amber-950 shadow">Mangga</button>
+                <button onclick="change3DFlavor('stroberi')" class="px-3 py-1 text-xs font-bold rounded-full bg-pink-500 text-white shadow">Stroberi</button>
+            </div>
+            <p class="text-xs text-gray-400 mt-2">Geser objek 3D di atas untuk memutar & klik tombol rasa</p>
+        </div>
+    </header>
+
+    <!-- Katalog & Form Pemesanan Otomatis -->
+    <main id="order-section" class="max-w-5xl mx-auto px-4 pb-20">
+        <div class="text-center mb-10">
+            <h2 class="text-3xl font-extrabold text-gray-900">Pilih Varian Favoritmu</h2>
+            <p class="text-gray-500 text-sm mt-1">Atur jumlah pesanan di bawah ini, total harga & format WhatsApp terisi otomatis!</p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-6 mb-10">
+            <!-- Varian 1: Cokelat -->
+            <div class="card-3d bg-white rounded-3xl p-6 shadow-lg border border-amber-100 flex flex-col justify-between">
+                <div>
+                    <div class="h-36 rounded-2xl bg-gradient-to-br from-amber-800 to-amber-950 flex items-center justify-center text-6xl shadow-inner mb-4">
+                        🍫
+                    </div>
+                    <div class="flex justify-between items-center mb-1">
+                        <h3 class="text-xl font-bold text-gray-900">Puding Cokelat</h3>
+                        <span class="text-xs font-bold bg-amber-100 text-amber-900 px-2.5 py-1 rounded-full">Best Seller</span>
+                    </div>
+                    <p class="text-gray-500 text-sm mb-4">Cokelat pekat premium yang lembut dan lumer saat disedot.</p>
+                </div>
+                <div class="pt-4 border-t border-gray-100 flex items-center justify-between">
+                    <span class="font-bold text-lg text-amber-900">Rp 4.000</span>
+                    <div class="flex items-center space-x-3 bg-gray-100 rounded-xl px-2 py-1">
+                        <button onclick="updateQty('coklat', -1)" class="w-8 h-8 rounded-lg bg-white font-bold text-gray-700 shadow hover:bg-gray-50">-</button>
+                        <span id="qty-coklat" class="font-bold w-6 text-center">0</span>
+                        <button onclick="updateQty('coklat', 1)" class="w-8 h-8 rounded-lg bg-amber-900 font-bold text-white shadow hover:bg-amber-800">+</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Varian 2: Mangga -->
+            <div class="card-3d bg-white rounded-3xl p-6 shadow-lg border border-yellow-100 flex flex-col justify-between">
+                <div>
+                    <div class="h-36 rounded-2xl bg-gradient-to-br from-yellow-300 to-amber-500 flex items-center justify-center text-6xl shadow-inner mb-4">
+                        🥭
+                    </div>
+                    <div class="flex justify-between items-center mb-1">
+                        <h3 class="text-xl font-bold text-gray-900">Puding Mangga</h3>
+                        <span class="text-xs font-bold bg-yellow-100 text-yellow-800 px-2.5 py-1 rounded-full">Segar</span>
+                    </div>
+                    <p class="text-gray-500 text-sm mb-4">Perpaduan manis dan segarnya buah mangga yang bikin melek.</p>
+                </div>
+                <div class="pt-4 border-t border-gray-100 flex items-center justify-between">
+                    <span class="font-bold text-lg text-amber-600">Rp 4.000</span>
+                    <div class="flex items-center space-x-3 bg-gray-100 rounded-xl px-2 py-1">
+                        <button onclick="updateQty('mangga', -1)" class="w-8 h-8 rounded-lg bg-white font-bold text-gray-700 shadow hover:bg-gray-50">-</button>
+                        <span id="qty-mangga" class="font-bold w-6 text-center">0</span>
+                        <button onclick="updateQty('mangga', 1)" class="w-8 h-8 rounded-lg bg-amber-500 font-bold text-white shadow hover:bg-amber-600">+</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Varian 3: Stroberi -->
+            <div class="card-3d bg-white rounded-3xl p-6 shadow-lg border border-pink-100 flex flex-col justify-between">
+                <div>
+                    <div class="h-36 rounded-2xl bg-gradient-to-br from-pink-400 to-rose-500 flex items-center justify-center text-6xl shadow-inner mb-4">
+                        🍓
+                    </div>
+                    <div class="flex justify-between items-center mb-1">
+                        <h3 class="text-xl font-bold text-gray-900">Puding Stroberi</h3>
+                        <span class="text-xs font-bold bg-pink-100 text-pink-700 px-2.5 py-1 rounded-full">Favorit</span>
+                    </div>
+                    <p class="text-gray-500 text-sm mb-4">Rasa stroberi creamy yang manis asam pas dan menyegarkan.</p>
+                </div>
+                <div class="pt-4 border-t border-gray-100 flex items-center justify-between">
+                    <span class="font-bold text-lg text-pink-600">Rp 4.000</span>
+                    <div class="flex items-center space-x-3 bg-gray-100 rounded-xl px-2 py-1">
+                        <button onclick="updateQty('stroberi', -1)" class="w-8 h-8 rounded-lg bg-white font-bold text-gray-700 shadow hover:bg-gray-50">-</button>
+                        <span id="qty-stroberi" class="font-bold w-6 text-center">0</span>
+                        <button onclick="updateQty('stroberi', 1)" class="w-8 h-8 rounded-lg bg-pink-600 font-bold text-white shadow hover:bg-pink-700">+</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ringkasan & Tombol Checkout Otomatis -->
+        <div class="bg-white rounded-3xl p-6 sm:p-8 shadow-xl border border-pink-100 max-w-2xl mx-auto">
+            <h3 class="text-xl font-bold text-gray-900 mb-4">Ringkasan Pesanan Pre-Order</h3>
+            
+            <div class="space-y-3 mb-6">
+                <div>
+                    <label class="block text-xs font-semibold text-gray-600 mb-1">Nama Pemesan</label>
+                    <input type="text" id="customer-name" placeholder="Contoh: Budi" class="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:border-pink-500 text-sm">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-gray-600 mb-1">Catatan / Alamat Pengiriman (Opsional)</label>
+                    <input type="text" id="customer-note" placeholder="Contoh: Ambil sore / Kirim ke..." class="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:border-pink-500 text-sm">
+                </div>
+            </div>
+
+            <div class="bg-gray-50 rounded-2xl p-4 mb-6 flex justify-between items-center">
+                <div>
+                    <span class="text-xs text-gray-500 block">Total Item: <strong id="total-items" class="text-gray-800">0 pcs</strong></span>
+                    <span class="text-sm font-semibold text-gray-700">Total Pembayaran</span>
+                </div>
+                <div class="text-2xl font-extrabold text-pink-600" id="total-price">Rp 0</div>
+            </div>
+
+            <div class="grid sm:grid-cols-2 gap-3">
+                <button onclick="orderViaWhatsApp()" class="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-3.5 px-5 rounded-2xl shadow-lg flex items-center justify-center gap-2 transition transform hover:scale-[1.02]">
+                    <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.1.824z"/></svg>
+                    <span>Pesan via WhatsApp</span>
+                </button>
+                <a href="https://instagram.com/seduputenak" target="_blank" rel="noopener noreferrer" class="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:opacity-95 text-white font-bold py-3.5 px-5 rounded-2xl shadow-lg flex items-center justify-center gap-2 transition transform hover:scale-[1.02]">
+                    <span>Cek IG @seduputenak</span>
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-gray-100 py-6 text-center text-xs text-gray-500">
+        <p class="font-bold text-gray-700 mb-1">SEDUPUT ENAK (@seduputenak)</p>
+        <p>WhatsApp Order: 0831-6821-9816 • Harga Rp 4.000/pcs</p>
+    </footer>
+
+    <!-- Script Keranjang, WA Otomatis & Visual 3D -->
+    <script>
+        const PRICE_PER_PCS = 4000;
+        const WA_NUMBER = "6283168219816";
+        const cart = { coklat: 0, mangga: 0, stroberi: 0 };
+
+        function updateQty(flavor, change) {
+            cart[flavor] = Math.max(0, cart[flavor] + change);
+            document.getElementById(`qty-${flavor}`).innerText = cart[flavor];
+            calculateTotal();
+            change3DFlavor(flavor);
+        }
+
+        function calculateTotal() {
+            const totalItems = cart.coklat + cart.mangga + cart.stroberi;
+            const totalPrice = totalItems * PRICE_PER_PCS;
+            document.getElementById('total-items').innerText = `${totalItems} pcs`;
+            document.getElementById('total-price').innerText = `Rp ${totalPrice.toLocaleString('id-ID')}`;
+        }
+
+        function orderViaWhatsApp() {
+            const totalItems = cart.coklat + cart.mangga + cart.stroberi;
+            if (totalItems === 0) {
+                alert("Pilih minimal 1 pcs puding sedot dulu ya!");
+                return;
+            }
+            const name = document.getElementById('customer-name').value.trim() || "Pelanggan";
+            const note = document.getElementById('customer-note').value.trim();
+            const totalPrice = totalItems * PRICE_PER_PCS;
+
+            let message = `Halo *SEDUPUT ENAK*! Saya mau Pre-Order Puding Sedot:\n\n`;
+            message += `👤 *Nama:* ${name}\n`;
+            if (cart.coklat > 0) message += `🍫 Cokelat: ${cart.coklat} pcs\n`;
+            if (cart.mangga > 0) message += `🥭 Mangga: ${cart.mangga} pcs\n`;
+            if (cart.stroberi > 0) message += `🍓 Stroberi: ${cart.stroberi} pcs\n`;
+            message += `\n📦 *Total:* ${totalItems} pcs`;
+            message += `\n💰 *Total Bayar:* Rp ${totalPrice.toLocaleString('id-ID')}`;
+            if (note) message += `\n📝 *Catatan:* ${note}`;
+            message += `\n\nMohon info pembayarannya ya. Terima kasih!`;
+
+            const url = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(message)}`;
+            window.open(url, '_blank');
+        }
+
+        // --- Setup 3D Standing Pouch Interaktif (Three.js) ---
+        const container = document.getElementById('canvas-container');
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 1000);
+        camera.position.z = 5.5;
+
+        const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+        renderer.setSize(container.clientWidth, container.clientHeight);
+        container.appendChild(renderer.domElement);
+
+        // Pencahayaan
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
+        scene.add(ambientLight);
+        const dirLight = new THREE.DirectionalLight(0xffffff, 0.8);
+        dirLight.position.set(5, 8, 7);
+        scene.add(dirLight);
+
+        // Grup Kemasan Standing Pouch 3D
+        const pouchGroup = new THREE.Group();
+
+        // Isi Puding di dalam pouch
+        const liquidGeo = new THREE.BoxGeometry(1.7, 2.3, 0.65);
+        const liquidMat = new THREE.MeshStandardMaterial({ color: 0x5c3317, roughness: 0.3 });
+        const liquidMesh = new THREE.Mesh(liquidGeo, liquidMat);
+        liquidMesh.position.y = -0.15;
+        pouchGroup.add(liquidMesh);
+
+        // Plastik Transparan Standing Pouch
+        const pouchGeo = new THREE.BoxGeometry(1.9, 2.8, 0.75);
+        const pouchMat = new THREE.MeshPhysicalMaterial({
+            color: 0xffffff,
+            transparent: true,
+            opacity: 0.35,
+            roughness: 0.1,
+            metalness: 0.1
+        });
+        const pouchMesh = new THREE.Mesh(pouchGeo, pouchMat);
+        pouchGroup.add(pouchMesh);
+
+        // Sedotan
+        const strawGeo = new THREE.CylinderGeometry(0.08, 0.08, 2.2, 16);
+        const strawMat = new THREE.MeshStandardMaterial({ color: 0xf43f5e });
+        const strawMesh = new THREE.Mesh(strawGeo, strawMat);
+        strawMesh.position.set(0.25, 1.3, 0);
+        strawMesh.rotation.z = -0.15;
+        pouchGroup.add(strawMesh);
+
+        scene.add(pouchGroup);
+
+        function change3DFlavor(flavor) {
+            const colors = {
+                coklat: 0x5c3317,
+                mangga: 0xfbbf24,
+                stroberi: 0xf472b6
+            };
+            if (colors[flavor]) {
+                liquidMat.color.setHex(colors[flavor]);
+            }
+        }
+
+        // Kontrol Putar dengan Mouse / Sentuhan
+        let isDragging = false;
+        let prevX = 0;
+        container.addEventListener('pointerdown', (e) => { isDragging = true; prevX = e.clientX; });
+        window.addEventListener('pointerup', () => { isDragging = false; });
+        window.addEventListener('pointermove', (e) => {
+            if (!isDragging) return;
+            const deltaX = e.clientX - prevX;
+            pouchGroup.rotation.y += deltaX * 0.015;
+            prevX = e.clientX;
+        });
+
+        function animate() {
+            requestAnimationFrame(animate);
+            if (!isDragging) {
+                pouchGroup.rotation.y += 0.01;
+            }
+            renderer.render(scene, camera);
+        }
+        animate();
+
+        window.addEventListener('resize', () => {
+            if (!container) return;
+            camera.aspect = container.clientWidth / container.clientHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(container.clientWidth, container.clientHeight);
+        });
+    </script>
+</body>
+</html>
